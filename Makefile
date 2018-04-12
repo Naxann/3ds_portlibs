@@ -7,6 +7,11 @@ BZIP2_VERSION         := $(BZIP2)-1.0.6
 BZIP2_SRC             := $(BZIP2_VERSION).tar.gz
 BZIP2_DOWNLOAD        := "http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz"
 
+CURL                  := curl
+CURL_VERSION          := $(CURL)-7.58.0
+CURL_SRC              := $(CURL_VERSION).tar.bz2
+CURL_DOWNLOAD         := https://github.com/curl/curl/releases/download/$(subst .,_,$(CURL_VERSION))/$(CURL_SRC)
+
 FREETYPE              := freetype
 FREETYPE_VERSION      := $(FREETYPE)-2.6.2
 FREETYPE_SRC          := $(FREETYPE_VERSION).tar.bz2
@@ -18,9 +23,14 @@ GIFLIB_SRC            := $(GIFLIB_VERSION).tar.bz2
 GIFLIB_DOWNLOAD       := "http://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.bz2"
 
 JANSSON               := jansson
-JANSSON_VERSION       := $(JANSSON)-2.7
-JANSSON_SRC           := $(JANSSON_VERSION).tar.gz
-JANSSON_DOWNLOAD      := https://github.com/akheron/jansson/archive/v2.7.tar.gz
+JANSSON_VERSION       := $(JANSSON)-2.10
+JANSSON_SRC           := $(JANSSON_VERSION).tar.bz2
+JANSSON_DOWNLOAD      := http://www.digip.org/jansson/releases/jansson-2.10.tar.bz2
+
+LIBARCHIVE            := libarchive
+LIBARCHIVE_VERSION    := $(LIBARCHIVE)-3.1.2
+LIBARCHIVE_SRC        := $(LIBARCHIVE_VERSION).tar.gz
+LIBARCHIVE_DOWNLOAD   := "http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz"
 
 LIBCONFIG             := libconfig
 LIBCONFIG_VERSION     := $(LIBCONFIG)-1.5
@@ -47,15 +57,16 @@ LIBOGG_VERSION        := $(LIBOGG)-1.3.2
 LIBOGG_SRC            := $(LIBOGG_VERSION).tar.xz
 LIBOGG_DOWNLOAD       := "http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.xz"
 
+LIBOPUS               := libopus
+LIBOPUS_VERSION       := opus-1.2.1
+LIBOPUS_SRC           := $(LIBOPUS_VERSION).tar.gz
+LIBOPUS_DOWNLOAD      := https://archive.mozilla.org/pub/opus/opus-1.2.1.tar.gz
+
 LIBPNG                := libpng
 LIBPNG_VERSION        := $(LIBPNG)-1.6.21
 LIBPNG_SRC            := $(LIBPNG_VERSION).tar.xz
 LIBPNG_DOWNLOAD       := http://prdownloads.sourceforge.net/libpng/libpng-1.6.21.tar.xz?download
 
-LIBXML2               := libxml2
-LIBXML2_VERSION       := $(LIBXML2)-2.9.3
-LIBXML2_SRC           := $(LIBXML2_VERSION).tar.gz
-LIBXML2_DOWNLOAD      := "http://xmlsoft.org/sources/libxml2-2.9.3.tar.gz"
 
 LIBXMP_LITE           := libxmp-lite
 LIBXMP_LITE_VERSION   := $(LIBXMP_LITE)-4.3.10
@@ -63,24 +74,36 @@ LIBXMP_LITE_SRC       := $(LIBXMP_LITE_VERSION).tar.gz
 LIBXMP_LITE_DOWNLOAD  := http://sourceforge.net/projects/xmp/files/libxmp/4.3.10/libxmp-lite-4.3.10.tar.gz/download
 
 MBED                  := mbedtls
-MBED_VERSION          := $(MBED)-2.4.0
-MBED_SRC              := $(MBED_VERSION).tgz
-MBED_DOWNLOAD         := "https://tls.mbed.org/download/mbedtls-2.4.0-gpl.tgz"
+MBED_VERSION          := $(MBED)-2.7.0
 
-SQLITE                := sqlite
-SQLITE_VERSION        := $(SQLITE)-autoconf-3100200
-SQLITE_SRC            := $(SQLITE_VERSION).tar.gz
-SQLITE_DOWNLOAD       := https://www.sqlite.org/2016/sqlite-autoconf-3100200.tar.gz
+MBED_APACHE           := $(MBED)-apache
+MBED_APACHE_SRC       := $(MBED_VERSION)-apache.tgz
+MBED_APACHE_DOWNLOAD  := "https://tls.mbed.org/download/$(MBED_APACHE_SRC)"
+
+MBED_GPL              := $(MBED)-gpl
+MBED_GPL_SRC          := $(MBED_VERSION)-gpl.tgz
+MBED_GPL_DOWNLOAD     := "https://tls.mbed.org/download/$(MBED_GPL_SRC)"
+
+MIKMOD                := libmikmod
+MIKMOD_VERSION        := $(MIKMOD)-3.3.11.1
+MIKMOD_SRC            := $(MIKMOD_VERSION).tar.gz
+MIKMOD_DOWNLOAD       := http://sourceforge.net/projects/mikmod/files/libmikmod/3.3.11.1/libmikmod-3.3.11.1.tar.gz/download
+
+OPUSFILE              := opusfile
+OPUSFILE_VERSION      := $(OPUSFILE)-0.9
+OPUSFILE_SRC          := $(OPUSFILE_VER).tar.gz
+OPUSFILE_DOWNLOAD     := https://downloads.xiph.org/releases/opus/opusfile-0.9.tar.gz
 
 TINYXML               := tinyxml2
 TINYXML_VERSION       := $(TINYXML)-3.0.0
 TINYXML_SRC           := $(TINYXML_VERSION).tar.gz
 TINYXML_DOWNLOAD      := https://github.com/leethomason/tinyxml2/archive/3.0.0.tar.gz
 
+# Tremor Low Memory Branch
 TREMOR                := tremor
-TREMOR_VERSION        := $(TREMOR)-2a1a8f6
+TREMOR_VERSION        := $(TREMOR)-293fd1c
 TREMOR_SRC            := $(TREMOR_VERSION).tar.gz
-TREMOR_DOWNLOAD       := https://git.xiph.org/?p=tremor.git;a=snapshot;h=2a1a8f621e500fdf0749f115e2206f82919560a3;sf=tgz
+TREMOR_DOWNLOAD       := https://git.xiph.org/?p=tremor.git;a=snapshot;h=293fd1c04f9d4489be6d4b2b1ca8698f2f902e8e;sf=tgz
 
 XZ                    := xz
 XZ_VERSION            := $(XZ)-5.2.2
@@ -115,12 +138,6 @@ FMT                   := fmt
 FMT_VERSION           := $(FMT)-3.0.1
 FMT_SRC               := $(FMT_VERSION).tar.gz
 FMT_DOWNLOAD          := https://github.com/fmtlib/fmt/archive/3.0.1.tar.gz
-
-# libarchive for dealing with lots of archives files : we use libarchive download file because of the configure file present, which is not in the github repo link
-LIBARCHIVE                   := libarchive
-LIBARCHIVE_VERSION           := $(LIBARCHIVE)-3.1.2
-LIBARCHIVE_SRC               := $(LIBARCHIVE_VERSION).tar.gz
-LIBARCHIVE_DOWNLOAD          := http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz
 
 
 ######################################
@@ -161,16 +178,6 @@ SPEEX_VERSION         := $(SPEEX)-1.2rc1
 SPEEX_SRC             := $(SPEEX_VERSION).tar.gz
 SPEEX_DOWNLOAD        := http://downloads.xiph.org/releases/speex/speex-1.2rc1.tar.gz
 
-LIBOPUS               := libopus
-LIBOPUS_VERSION       := opus-1.1.4
-LIBOPUS_SRC           := $(LIBOPUS_VERSION).tar.gz
-LIBOPUS_DOWNLOAD      := "http://downloads.xiph.org/releases/opus/opus-1.1.4.tar.gz"
-
-LIBOPUSFILE           := libopusfile
-LIBOPUSFILE_VERSION   := opusfile-0.8
-LIBOPUSFILE_SRC       := $(LIBOPUSFILE_VERSION).tar.gz
-LIBOPUSFILE_DOWNLOAD  := "https://archive.mozilla.org/pub/opus/opusfile-0.8.tar.gz"
-
 FFMPEG                := ffmpeg
 FFMPEG_VERSION       := $(FFMPEG)-3.2.2
 FFMPEG_SRC            := $(FFMPEG_VERSION).tar.bz2
@@ -186,100 +193,121 @@ LIBSSH2_VERSION        := $(LIBSSH2)-1.8.0
 LIBSSH2_SRC            := $(LIBSSH2_VERSION).tar.xz
 LIBSSH2_DOWNLOAD       := https://www.libssh2.org/download/libssh2-1.8.0.tar.gz
 
+LIBXML2               := libxml2
+LIBXML2_VERSION       := $(LIBXML2)-2.9.3
+LIBXML2_SRC           := $(LIBXML2_VERSION).tar.gz
+LIBXML2_DOWNLOAD      := "http://xmlsoft.org/sources/libxml2-2.9.3.tar.gz"
+
+SQLITE                := sqlite
+SQLITE_VERSION        := $(SQLITE)-autoconf-3100200
+SQLITE_SRC            := $(SQLITE_VERSION).tar.gz
+SQLITE_DOWNLOAD       := https://www.sqlite.org/2016/sqlite-autoconf-3100200.tar.gz
+
 ######################################
 # Global config for compiling those libs
 ######################################
 
 export PORTLIBS_PATH  := $(DEVKITPRO)/portlibs
 export PATH           := $(DEVKITARM)/bin:$(PORTLIBS_PATH)/3ds/bin:$(PORTLIBS_PATH)/armv6k/bin:$(PATH)
+export ACLOCAL_FLAGS  := -I  $(DEVKITPRO)/portlibs/3ds/share/aclocal -I $(DEVKITPRO)/portlibs/armv6k/share/aclocal
 export PKG_CONFIG     := $(PWD)/arm-none-eabi-pkg-config
 
 export CFLAGS         := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft -O3 -mword-relocations -ffunction-sections
-export CPPFLAGS       := -I$(PORTLIBS_PATH)/armv6k/include
-export LDFLAGS        := -L$(PORTLIBS_PATH)/armv6k/lib
+export CPPFLAGS       := -I$(DEVKITPRO)/libctru/include -I$(PORTLIBS_PATH)/3ds/include -I$(PORTLIBS_PATH)/armv6k/include
+export LDFLAGS        := -L$(DEVKITPRO)/libctru/lib -L$(PORTLIBS_PATH)/3ds/lib -L$(PORTLIBS_PATH)/armv6k/lib
+export LIBS           := -lctru
 
 ######################################
 # Targets 
 ######################################
 
-.PHONY: all install install-zlib clean download \
+.PHONY: all \
+        install \
+        install-zlib \
+        clean \
+        download \
         $(BZIP2) \
         $(FREETYPE) \
         $(GIFLIB) \
         $(JANSSON) \
+        $(LIBARCHIVE) \
         $(LIBCONFIG) \
         $(LIBEXIF) \
         $(LIBJPEGTURBO) \
         $(LIBMAD) \
         $(LIBOGG) \
+		$(LIBOPUS) \
         $(LIBPNG) \
-        $(MBED) \
-        $(LIBXML2) \
+        $(MBED_APACHE) \
+        $(MBED_GPL) \
+		$(OPUSFILE) \
         $(LIBXMP_LITE) \
-        $(SQLITE) \
         $(TINYXML) \
         $(TREMOR) \
         $(XZ) \
+        $(MIKMOD) \
         $(ZLIB) \
 		$(LIBVORBIS) \
 		$(LIBFAAD2) \
 		$(FMT) \
-		$(LIBARCHIVE) \
 		$(MXML) \
 		$(EXPAT) \
 		$(NETTLE) \
 		$(WSLAY) \
 		$(SPEEX) \
-		$(LIBOPUS) \
-		$(LIBOPUSFILE) \
 		$(FFMPEG) \
 		$(MPG123) \
-		$(LIBSSH2)
+		$(LIBSSH2) \
+        $(LIBXML2) \
+        $(SQLITE)
 			
 ######################################
 # Help 
 ######################################
 
-all:
+all: $(DEVKITPRO)/portlibs/armv6k/bin/arm-none-eabi-pkg-config $(DEVKITPRO)/portlibs/3ds/bin/arm-none-eabi-pkg-config
 	@echo "Please choose one of the following targets:"
 	@echo "  $(BZIP2)"
-	@echo "  $(FREETYPE) (requires $(LIBPNG) and zlib to be installed)"
+	@echo "  $(CURL) (requires zlib and mbedtls to be installed)"
+	@echo "  $(FREETYPE) (requires zlib to be installed)"
 	@echo "  $(GIFLIB)"
 	@echo "  $(JANSSON)"
+	@echo "  $(LIBARCHIVE) (requires zlib, $(BZIP2), and $(XZ) to be installed)"
 	@echo "  $(LIBCONFIG)"
 	@echo "  $(LIBEXIF)"
 	@echo "  $(LIBJPEGTURBO)"
 	@echo "  $(LIBMAD)"
 	@echo "  $(LIBOGG)"
+	@echo "  $(LIBOPUS)"
 	@echo "  $(LIBPNG) (requires zlib to be installed)"
-	@echo "  $(LIBXML2)"
 	@echo "  $(LIBXMP_LITE)"
-	@echo "  $(MBED) (requires zlib to be installed)"
-	@echo "  $(SQLITE)"
+	@echo "  $(MBED_APACHE) (requires zlib to be installed)"
+	@echo "  $(MBED_GPL) (requires zlib to be installed)"
+	@echo "  $(OPUSFILE) (requires $(LIBOPUS) and $(LIBOGG) to be installed)"
 	@echo "  $(TINYXML)"
 	@echo "  $(TREMOR) (requires $(LIBOGG) to be installed)"
 	@echo "  $(XZ)"
+	@echo "  $(MIKMOD)"
 	@echo "  $(ZLIB)"
 	@echo "  $(LIBVORBIS) (requires $(LIBOGG) to be installed)"
 	@echo "  $(LIBFAAD2)"
 	@echo "  $(FMT)"
-	@echo "  $(LIBARCHIVE) (requires zlib to be installed)"
 	@echo "  $(MXML)"
 	@echo "  $(EXPAT)"
 	@echo "  $(NETTLE)"
 	@echo "  $(WSLAY)"
 	@echo "  $(SPEEX) (requires $(LIBOGG) to be installed)"
-	@echo "  $(LIBOPUS) (requires $(LIBOGG) to be installed)"
-	@echo "  $(LIBOPUSFILE) (requires $(LIBOPUS) to be installed)"
 	@echo "  $(FFMPEG)"
 	@echo "  $(MPG123)"
 	@echo "  $(LIBSSH2) (requires zlib and $(MBED) to be installed)"
+	@echo "  $(LIBXML2)"
+	@echo "  $(SQLITE)"
 
 ######################################
 # Download 
 ######################################
 
-download: $(BZIP2_SRC) $(FREETYPE_SRC) $(GIFLIB_SRC) $(JANSSON_SRC) $(LIBCONFIG_SRC) $(LIBEXIF_SRC) $(LIBJPEGTURBO_SRC) $(LIBMAD_SRC) $(LIBOGG_SRC) $(LIBPNG_SRC) $(LIBXML2_SRC) $(LIBXMP_LITE_SRC) $(MBED_SRC) $(SQLITE_SRC) $(TINYXML_SRC) $(TREMOR_SRC) $(XZ_SRC) $(ZLIB_SRC) $(LIBVORBIS_SRC) $(LIBFAAD2_SRC) $(FMT_SRC) $(LIBARCHIVE_SRC) $(MXML_SRC) $(EXPAT_SRC) $(NETTLE_SRC) $(WSLAY_SRC) $(LIBOPUS_SRC) $(LIBOPUSFILE_SRC) $(FFMPEG_SRC) $(MPG123_SRC) $(LIBSSH2_SRC)
+download: $(BZIP2_SRC) $(CURL_SRC) $(FREETYPE_SRC) $(GIFLIB_SRC) $(JANSSON_SRC) $(LIBARCHIVE_SRC) $(LIBCONFIG_SRC) $(LIBEXIF_SRC) $(LIBJPEGTURBO_SRC) $(LIBMAD_SRC) $(LIBOGG_SRC) $(LIBOPUS_SRC) $(LIBPNG_SRC) $(LIBXMP_LITE_SRC) $(MBED_APACHE_SRC) $(OPUSFILE_SRC) $(TINYXML_SRC) $(TREMOR_SRC) $(XZ_SRC) $(MIKMOD_SRC) $(ZLIB_SRC) $(LIBVORBIS_SRC) $(LIBFAAD2_SRC) $(FMT_SRC) $(MXML_SRC) $(EXPAT_SRC) $(NETTLE_SRC) $(WSLAY_SRC) $(FFMPEG_SRC) $(MPG123_SRC) $(LIBSSH2_SRC) $(LIBXML_SRC) $(SQLITE_SRC)
 
 DOWNLOAD = wget --no-check-certificate -O "$(1)" "$(2)" || curl -Lo "$(1)" "$(2)"
 
@@ -287,8 +315,12 @@ DOWNLOAD = wget --no-check-certificate -O "$(1)" "$(2)" || curl -Lo "$(1)" "$(2)
 # Download specific lib
 ######################################
 
+
 $(BZIP2_SRC):
 	@$(call DOWNLOAD,$@,$(BZIP2_DOWNLOAD))
+
+$(CURL_SRC):
+	@$(call DOWNLOAD,$@,$(CURL_DOWNLOAD))
 
 $(FREETYPE_SRC):
 	$(call DOWNLOAD,$@,$(FREETYPE_DOWNLOAD))
@@ -298,6 +330,9 @@ $(GIFLIB_SRC):
 
 $(JANSSON_SRC):
 	@$(call DOWNLOAD,$@,$(JANSSON_DOWNLOAD))
+
+$(LIBARCHIVE_SRC):
+	@$(call DOWNLOAD,$@,$(LIBARCHIVE_DOWNLOAD))
 
 $(LIBCONFIG_SRC):
 	@$(call DOWNLOAD,$@,$(LIBCONFIG_DOWNLOAD))
@@ -314,20 +349,23 @@ $(LIBMAD_SRC):
 $(LIBOGG_SRC):
 	@$(call DOWNLOAD,$@,$(LIBOGG_DOWNLOAD))
 
+$(LIBOPUS_SRC):
+	@$(call DOWNLOAD,$@,$(LIBOPUS_DOWNLOAD))
+
 $(LIBPNG_SRC):
 	@$(call DOWNLOAD,$@,$(LIBPNG_DOWNLOAD))
-
-$(LIBXML2_SRC):
-	@$(call DOWNLOAD,$@,$(LIBXML2_DOWNLOAD))
 
 $(LIBXMP_LITE_SRC):
 	@$(call DOWNLOAD,$@,$(LIBXMP_LITE_DOWNLOAD))
 
-$(MBED_SRC):
-	@$(call DOWNLOAD,$@,$(MBED_DOWNLOAD))
+$(MBED_APACHE_SRC):
+	@$(call DOWNLOAD,$@,$(MBED_APACHE_DOWNLOAD))
 
-$(SQLITE_SRC):
-	@$(call DOWNLOAD,$@,$(SQLITE_DOWNLOAD))
+$(MBED_GPL_SRC):
+	@$(call DOWNLOAD,$@,$(MBED_GPL_DOWNLOAD))
+
+$(OPUSFILE_SRC):
+	@$(call DOWNLOAD,$@,$(OPUSFILE_DOWNLOAD))
 
 $(TINYXML_SRC):
 	@$(call DOWNLOAD,$@,$(TINYXML_DOWNLOAD))
@@ -338,9 +376,12 @@ $(TREMOR_SRC):
 $(XZ_SRC):
 	@$(call DOWNLOAD,$@,$(XZ_DOWNLOAD))
 
+$(MIKMOD_SRC):
+	$(call DOWNLOAD,$@,$(MIKMOD_DOWNLOAD))
+
 $(ZLIB_SRC):
 	@$(call DOWNLOAD,$@,$(ZLIB_DOWNLOAD))
-
+    
 $(LIBVORBIS_SRC):
 	@$(call DOWNLOAD,$@,$(LIBVORBIS_DOWNLOAD))
 
@@ -383,6 +424,12 @@ $(MPG123_SRC):
 $(LIBSSH2_SRC):
 	@$(call DOWNLOAD,$@,$(LIBSSH2_DOWNLOAD))
 
+$(LIBXML2_SRC):
+	@$(call DOWNLOAD,$@,$(LIBXML2_DOWNLOAD))
+
+$(SQLITE_SRC):
+	@$(call DOWNLOAD,$@,$(SQLITE_DOWNLOAD))
+
 ######################################
 # Cross-compile directives for each lib with patches if need one
 ######################################
@@ -392,11 +439,17 @@ $(BZIP2): $(BZIP2_SRC)
 	@cd $(BZIP2_VERSION)
 	@$(MAKE) -C $(BZIP2_VERSION) CC=arm-none-eabi-gcc AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib CPPFLAGS="$(CPPFLAGS)" CFLAGS="-D_FILE_OFFSET_BITS=64 -Winline $(CFLAGS)" libbz2.a
 
-# without-bzip2 and with-png=yes : compatibility issues even if we includebzip2 in project. libpng is enabled also for compatibility issues
+$(CURL): $(CURL_SRC)
+	@[ -d $(CURL_VERSION) ] || tar -xjf $<
+	@cd $(CURL_VERSION) && \
+	 patch -Np1 -i ../curl-7.58.0.patch && \
+	 ./configure CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" --prefix=$(PORTLIBS_PATH)/3ds --host=arm-none-eabi --disable-shared --enable-static --disable-ipv6 --disable-unix-sockets --disable-manual --disable-ntlm-wb --disable-threaded-resolver --with-mbedtls=$(PORTLIBS_PATH)/3ds
+	@$(MAKE) -C $(CURL_VERSION)/lib
+
 $(FREETYPE): $(FREETYPE_SRC)
 	@[ -d $(FREETYPE_VERSION) ] || tar -xjf $<
 	@cd $(FREETYPE_VERSION) && \
-	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --without-harfbuzz --without-bzip2 --with-png=yes
+	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --without-harfbuzz
 	@$(MAKE) -C $(FREETYPE_VERSION)
 
 $(GIFLIB): $(GIFLIB_SRC)
@@ -406,15 +459,22 @@ $(GIFLIB): $(GIFLIB_SRC)
 	@$(MAKE) -C $(GIFLIB_VERSION)
 
 $(JANSSON): $(JANSSON_SRC)
-	@[ -d $(JANSSON_VERSION) ] || tar -xzf $<
+	@[ -d $(JANSSON_VERSION) ] || tar -xjf $<
 	@cd $(JANSSON_VERSION) && \
-	 autoreconf -i && \
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static
 	@$(MAKE) -C $(JANSSON_VERSION)
+
+$(LIBARCHIVE): $(LIBARCHIVE_SRC)
+	@[ -d $(LIBARCHIVE_VERSION) ] || tar -xzf $<
+	@cd $(LIBARCHIVE_VERSION) && \
+	patch -Np1 -i ../libarchive-3.1.2.patch && \
+	./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --without-nettle --without-openssl --without-xml2 --without-expat --without-iconv --disable-bsdtar --disable-bsdcpio --disable-acl
+	@$(MAKE) -C $(LIBARCHIVE_VERSION)
 
 $(LIBCONFIG): $(LIBCONFIG_SRC)
 	@[ -d $(LIBCONFIG_VERSION) ] || tar -xzf $<
 	@cd $(LIBCONFIG_VERSION) && \
+	 autoreconf -i && \
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-cxx --disable-examples
 	@$(MAKE) -C $(LIBCONFIG_VERSION)/lib
 
@@ -443,17 +503,17 @@ $(LIBOGG): $(LIBOGG_SRC)
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static
 	@$(MAKE) -C $(LIBOGG_VERSION)
 
+$(LIBOPUS): $(LIBOPUS_SRC)
+	@[ -d $(LIBOPUS_VERSION) ] || tar -xzf $<
+	@cd $(LIBOPUS_VERSION) && \
+	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static
+	@$(MAKE) -C $(LIBOPUS_VERSION)
+
 $(LIBPNG): $(LIBPNG_SRC)
 	@[ -d $(LIBPNG_VERSION) ] || tar -xJf $<
 	@cd $(LIBPNG_VERSION) && \
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static
 	@$(MAKE) -C $(LIBPNG_VERSION)
-
-$(LIBXML2): $(LIBXML2_SRC)
-	@[ -d $(LIBXML2_VERSION) ] || tar -xzf $<
-	@cd $(LIBXML2_VERSION) && \
-	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --without-http --without-ftp --without-threads
-	@$(MAKE) -C $(LIBXML2_VERSION) libxml2.la
 
 $(LIBXMP_LITE): $(LIBXMP_LITE_SRC)
 	@[ -d $(LIBXMP_LITE_VERSION) ] || tar -xzf $<
@@ -461,25 +521,36 @@ $(LIBXMP_LITE): $(LIBXMP_LITE_SRC)
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static
 	@$(MAKE) -C $(LIBXMP_LITE_VERSION)
 
-$(MBED): $(MBED_SRC)
-	@[ -d $(MBED_VERSION) ] || tar xzf $<
-	@cd $(MBED_VERSION) && \
-	 patch -Np1 -i ../libmbedtls-2.4.0.patch && \
+$(MBED_APACHE): $(MBED_APACHE_SRC)
+	@[ -d $(MBED_VERSION)-apache ] || { tar -xzf $< && mv $(MBED_VERSION) $(MBED_VERSION)-apache; }
+	@cd $(MBED_VERSION)-apache && \
+	 patch -Np1 -i ../libmbedtls-2.7.0.patch && \
 	 cmake -DCMAKE_SYSTEM_NAME=Generic -DCMAKE_C_COMPILER=$(DEVKITARM)/bin/arm-none-eabi-gcc \
 	 -DCMAKE_CXX_COMPILER=$(DEVKITARM)/bin/arm-none-eabi-g++ \
-	 -DCMAKE_INSTALL_PREFIX=$(PORTLIBS_PATH)/armv6k -DCMAKE_C_FLAGS="$(CFLAGS)" \
+	 -DCMAKE_INSTALL_PREFIX=$(PORTLIBS_PATH)/3ds -DCMAKE_C_FLAGS="$(CFLAGS) $(CPPFLAGS)" \
 	 -DCMAKE_CXX_FLAGS="$(CFLAGS) -fno-exceptions -fno-rtti" \
 	 -DZLIB_ROOT="$(PORTLIBS_PATH)/armv6k" \
 	 -DENABLE_ZLIB_SUPPORT=TRUE -DENABLE_TESTING=FALSE -DENABLE_PROGRAMS=FALSE .
-	@$(MAKE) -C $(MBED_VERSION)
+	@$(MAKE) -C $(MBED_VERSION)-apache
 
-# sqlite won't work with -ffast-math
-$(SQLITE): $(SQLITE_SRC)
-	@[ -d $(SQLITE_VERSION) ] || tar -xzf $<
-	@cd $(SQLITE_VERSION) && \
-	 CFLAGS="$(filter-out -ffast-math,$(CFLAGS)) -DSQLITE_OS_OTHER=1" ./configure --disable-shared --disable-threadsafe --disable-dynamic-extensions --host=arm-none-eabi --prefix=$(PORTLIBS_PATH)/armv6k
-	# avoid building sqlite3 shell
-	@$(MAKE) -C $(SQLITE_VERSION) libsqlite3.la
+$(MBED_GPL): $(MBED_GPL_SRC)
+	@[ -d $(MBED_VERSION)-gpl ] || { tar -xzf $< && mv $(MBED_VERSION) $(MBED_VERSION)-gpl; }
+	@cd $(MBED_VERSION)-gpl && \
+	 patch -Np1 -i ../libmbedtls-2.7.0.patch && \
+	 cmake -DCMAKE_SYSTEM_NAME=Generic -DCMAKE_C_COMPILER=$(DEVKITARM)/bin/arm-none-eabi-gcc \
+	 -DCMAKE_CXX_COMPILER=$(DEVKITARM)/bin/arm-none-eabi-g++ \
+	 -DCMAKE_INSTALL_PREFIX=$(PORTLIBS_PATH)/3ds -DCMAKE_C_FLAGS="$(CFLAGS) $(CPPFLAGS)" \
+	 -DCMAKE_CXX_FLAGS="$(CFLAGS) -fno-exceptions -fno-rtti" \
+	 -DZLIB_ROOT="$(PORTLIBS_PATH)/armv6k" \
+	 -DENABLE_ZLIB_SUPPORT=TRUE -DENABLE_TESTING=FALSE -DENABLE_PROGRAMS=FALSE .
+	@$(MAKE) -C $(MBED_VERSION)-gpl
+
+$(OPUSFILE): $(OPUSFILE_SRC)
+	@[ -d $(OPUSFILE_VERSION) ] || tar -xzf $<
+	@cd $(OPUSFILE_VERSION) && \
+	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static
+	@$(MAKE) -C $(OPUSFILE_VERSION)
+
 
 # tinyxml2 uses cmake
 $(TINYXML): $(TINYXML_SRC)
@@ -489,7 +560,6 @@ $(TINYXML): $(TINYXML_SRC)
 $(TREMOR): $(TREMOR_SRC)
 	@[ -d $(TREMOR_VERSION) ] || tar -xzf $<
 	@cd $(TREMOR_VERSION) && \
-	 patch -Np1 -i ../tremor.patch && \
 	 ./autogen.sh --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --disable-oggtest
 	@$(MAKE) -C $(TREMOR_VERSION)
 
@@ -498,6 +568,12 @@ $(XZ): $(XZ_SRC)
 	@cd $(XZ_VERSION) && \
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --disable-xz --enable-threads=no
 	@$(MAKE) -C $(XZ_VERSION)
+
+$(MIKMOD): $(MIKMOD_SRC)
+	@[ -d $(MIKMOD_VERSION) ] || tar -xzf $<
+	@cd $(MIKMOD_VERSION) && \
+	 ./configure --prefix=$(MIKMOD_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static
+	@$(MAKE) -C $(MIKMOD_VERSION)
 
 $(ZLIB): $(ZLIB_SRC)
 	@[ -d $(ZLIB_VERSION) ] || tar -xzf $<
@@ -523,14 +599,6 @@ $(FMT): $(FMT_SRC)
 	 patch -Np1 -i ../fmt.patch && \
 	 cmake -DCMAKE_BUILD_TYPE=None -DCMAKE_CXX_FLAGS="${CFLAGS}" -DCMAKE_TOOLCHAIN_FILE=../arm.cmake -DCMAKE_INSTALL_PREFIX=$(PORTLIBS_PATH)/armv6k -DFMT_TEST=OFF .
 	@$(MAKE) -C $(FMT_VERSION) VERBOSE=1
-
-# compatibility mode for freeShop, without lzma and bzip2 support
-$(LIBARCHIVE): $(LIBARCHIVE_SRC)
-	@[ -d $(LIBARCHIVE_VERSION) ] || tar -xzf $<
-	@cd $(LIBARCHIVE_VERSION) && \
-	 patch -Np1 -i ../libarchive.patch && \
-	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --without-bz2lib --without-lzma --without-nettle --without-openssl --without-xml2 --without-expat --without-iconv --disable-bsdtar --disable-bsdcpio --disable-acl
-	@$(MAKE) -C $(LIBARCHIVE_VERSION)
 
 $(MXML): $(MXML_SRC)
 	@[ -d $(MXML_VERSION) ] || tar -xzf $<
@@ -562,19 +630,6 @@ $(SPEEX): $(SPEEX_SRC)
 	@cd $(SPEEX_VERSION) && \
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --enable-fixed-point CFLAGS="$(CFLAGS)"
 	@$(MAKE) -C $(SPEEX_VERSION)
-
-
-$(LIBOPUS): $(LIBOPUS_SRC)
-	@[ -d $(LIBOPUS_VERSION) ] || tar -xzf $<
-	@cd $(LIBOPUS_VERSION) && \
-	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --disable-extra-programs --disable-rtcd --enable-fixed-point
-	@$(MAKE) -C $(LIBOPUS_VERSION)
-
-$(LIBOPUSFILE): $(LIBOPUSFILE_SRC)
-	@[ -d $(LIBOPUSFILE_VERSION) ] || tar -xzf $<
-	@cd $(LIBOPUSFILE_VERSION) && \
-	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --enable-fixed-point
-	@$(MAKE) -C $(LIBOPUSFILE_VERSION)
 
 $(FFMPEG): $(FFMPEG_SRC)
 	@[ -d $(FFMPEG_VERSION) ] || tar -xjf $<
@@ -624,12 +679,33 @@ $(LIBSSH2): $(LIBSSH2_SRC)
 	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --with-mbedtls=$(PORTLIBS_PATH)/armv6k --with-libmbedtls-prefix=$(PORTLIBS_PATH)/armv6k --disable-examples-build
 	@$(MAKE) -C $(LIBSSH2_VERSION)
 
+
+$(LIBXML2): $(LIBXML2_SRC)
+	@[ -d $(LIBXML2_VERSION) ] || tar -xzf $<
+	@cd $(LIBXML2_VERSION) && \
+	 ./configure --prefix=$(PORTLIBS_PATH)/armv6k --host=arm-none-eabi --disable-shared --enable-static --without-http --without-ftp --without-threads
+	@$(MAKE) -C $(LIBXML2_VERSION) libxml2.la
+
+# sqlite won't work with -ffast-math
+$(SQLITE): $(SQLITE_SRC)
+	@[ -d $(SQLITE_VERSION) ] || tar -xzf $<
+	@cd $(SQLITE_VERSION) && \
+	 CFLAGS="$(filter-out -ffast-math,$(CFLAGS)) -DSQLITE_OS_OTHER=1" ./configure --disable-shared --disable-threadsafe --disable-dynamic-extensions --host=arm-none-eabi --prefix=$(PORTLIBS_PATH)/armv6k
+	# avoid building sqlite3 shell
+	@$(MAKE) -C $(SQLITE_VERSION) libsqlite3.la
+
 ######################################
 # Installing libs in devkitPro/portlibs/armv6k
 ######################################
 
-install-zlib:
+install-$(ZLIB):
 	@$(MAKE) -C $(ZLIB_VERSION) install
+
+install-$(MBED_APACHE):
+	@$(MAKE) -C $(MBED_VERSION)-apache install
+
+install-$(MBED_GPL):
+	@$(MAKE) -C $(MBED_VERSION)-gpl install
 
 install:
 	@if [ -d $(BZIP2_VERSION) ]; then \
@@ -645,70 +721,90 @@ install:
 		cp -fv $(MPG123_VERSION)/src/libmpg123/.libs/libmpg123.a $(PORTLIBS_PATH)/armv6k/lib; \
 		cp -fv $(MPG123_VERSION)/src/libmpg123/libmpg123.la $(PORTLIBS_PATH)/armv6k/lib; \
 	fi
+	@[ ! -d $(CURL_VERSION) ] || { $(MAKE) -C $(CURL_VERSION)/lib install && $(MAKE) -C $(CURL_VERSION)/include install; }
 	@[ ! -d $(FREETYPE_VERSION) ] || $(MAKE) -C $(FREETYPE_VERSION) install
 	@[ ! -d $(GIFLIB_VERSION) ] || $(MAKE) -C $(GIFLIB_VERSION) install
 	@[ ! -d $(JANSSON_VERSION) ] || $(MAKE) -C $(JANSSON_VERSION) install
+	@[ ! -d $(LIBARCHIVE_VERSION) ] || $(MAKE) -C $(LIBARCHIVE_VERSION) install
 	@[ ! -d $(LIBCONFIG_VERSION) ] || $(MAKE) -C $(LIBCONFIG_VERSION)/lib install
 	@[ ! -d $(LIBEXIF_VERSION) ] || $(MAKE) -C $(LIBEXIF_VERSION) install
 	@[ ! -d $(LIBJPEGTURBO_VERSION) ] || $(MAKE) -C $(LIBJPEGTURBO_VERSION) install
 	@[ ! -d $(LIBMAD_VERSION) ] || $(MAKE) -C $(LIBMAD_VERSION) install
 	@[ ! -d $(LIBOGG_VERSION) ] || $(MAKE) -C $(LIBOGG_VERSION) install
+	@[ ! -d $(LIBOPUS_VERSION) ] || $(MAKE) -C $(LIBOPUS_VERSION) install
 	@[ ! -d $(LIBPNG_VERSION) ] || $(MAKE) -C $(LIBPNG_VERSION) install
-	@[ ! -d $(LIBXML2_VERSION) ] || $(MAKE) -C $(LIBXML2_VERSION) install
 	@[ ! -d $(LIBXMP_LITE_VERSION) ] || $(MAKE) -C $(LIBXMP_LITE_VERSION) install
-	@[ ! -d $(MBED_VERSION) ] || $(MAKE) -C $(MBED_VERSION) install
-	@[ ! -d $(SQLITE_VERSION) ] || $(MAKE) -C $(SQLITE_VERSION) install-libLTLIBRARIES install-data
+	@[ ! -d $(OPUSFILE_VERSION) ] || $(MAKE) -C $(OPUSFILE_VERSION) install
 	@[ ! -d $(TINYXML_VERSION) ] || $(MAKE) -C $(TINYXML_VERSION) install
 	@[ ! -d $(TREMOR_VERSION) ] || $(MAKE) -C $(TREMOR_VERSION) install
+	@[ ! -d $(MIKMOD_VERSION) ] || $(MAKE) -C $(MIKMOD_VERSION) install
 	@[ ! -d $(XZ_VERSION) ] || $(MAKE) -C $(XZ_VERSION) install
 	@[ ! -d $(LIBVORBIS_VERSION) ] || $(MAKE) -C $(LIBVORBIS_VERSION) install
 	@[ ! -d $(LIBFAAD2_VERSION) ] || $(MAKE) -C $(LIBFAAD2_VERSION) install
 	@[ ! -d $(FMT_VERSION) ] || $(MAKE) -C $(FMT_VERSION) install
-	@[ ! -d $(LIBARCHIVE_VERSION) ] || $(MAKE) -C $(LIBARCHIVE_VERSION) install
 	@[ ! -d $(MXML_VERSION) ] || $(MAKE) -C $(MXML_VERSION) install-libmxml.a
 	@[ ! -d $(EXPAT_VERSION) ] || $(MAKE) -C $(EXPAT_VERSION) install
 	@[ ! -d $(NETTLE_VERSION) ] || $(MAKE) -C $(NETTLE_VERSION) install-static
 	@[ ! -d $(WSLAY_VERSION) ] || $(MAKE) -C $(WSLAY_VERSION)/lib install
 	@[ ! -d $(SPEEX_VERSION) ] || $(MAKE) -C $(SPEEX_VERSION) install
-	@[ ! -d $(LIBOPUS_VERSION) ] || $(MAKE) -C $(LIBOPUS_VERSION) install
-	@[ ! -d $(LIBOPUSFILE_VERSION) ] || $(MAKE) -C $(LIBOPUSFILE_VERSION) install
 	@[ ! -d $(FFMPEG_VERSION) ] || $(MAKE) -C $(FFMPEG_VERSION) install
 	@[ ! -d $(LIBSSH2_VERSION) ] || $(MAKE) -C $(LIBSSH2_VERSION) install
+	@[ ! -d $(LIBXML2_VERSION) ] || $(MAKE) -C $(LIBXML2_VERSION) install
+	@[ ! -d $(SQLITE_VERSION) ] || $(MAKE) -C $(SQLITE_VERSION) install-libLTLIBRARIES install-data
 	
+######################################
+# Getting files needed
+######################################
+
+$(DEVKITPRO)/portlibs/armv6k/bin:
+	mkdir -p $@
+
+$(DEVKITPRO)/portlibs/3ds/bin:
+	mkdir -p $@
+
+$(DEVKITPRO)/portlibs/armv6k/bin/arm-none-eabi-pkg-config : $(DEVKITPRO)/portlibs/armv6k/bin armv6k-arm-none-eabi-pkg-config
+	cp armv6k-arm-none-eabi-pkg-config $@
+
+
+$(DEVKITPRO)/portlibs/3ds/bin/arm-none-eabi-pkg-config : $(DEVKITPRO)/portlibs/3ds/bin 3ds-arm-none-eabi-pkg-config
+	cp 3ds-arm-none-eabi-pkg-config $@
+
 ######################################
 # Cleaning directory and files
 ######################################
 
 clean:
 	@$(RM) -r $(BZIP2_VERSION)
+	@$(RM) -r $(CURL_VERSION)
 	@$(RM) -r $(FREETYPE_VERSION)
 	@$(RM) -r $(GIFLIB_VERSION)
 	@$(RM) -r $(JANSSON_VERSION)
+	@$(RM) -r $(LIBARCHIVE_VERSION)
 	@$(RM) -r $(LIBCONFIG_VERSION)
 	@$(RM) -r $(LIBEXIF_VERSION)
 	@$(RM) -r $(LIBJPEGTURBO_VERSION)
 	@$(RM) -r $(LIBMAD_VERSION)
 	@$(RM) -r $(LIBOGG_VERSION)
 	@$(RM) -r $(LIBPNG_VERSION)
-	@$(RM) -r $(LIBXML2_VERSION)
 	@$(RM) -r $(LIBXMP_LITE_VERSION)
-	@$(RM) -r $(MBED_VERSION)
-	@$(RM) -r $(SQLITE_VERSION)
+	@$(RM) -r $(MBED_VERSION)-apache
+	@$(RM) -r $(MBED_VERSION)-gpl
 	@$(RM) -r $(TINYXML_VERSION)
 	@$(RM) -r $(TREMOR_VERSION)
 	@$(RM) -r $(XZ_VERSION)
+	@$(RM) -r $(MIKMOD_VERSION)
 	@$(RM) -r $(ZLIB_VERSION)
 	@$(RM) -r $(LIBVORBIS_VERSION)
 	@$(RM) -r $(LIBFAAD2_VERSION)
 	@$(RM) -r $(FMT_VERSION)
-	@$(RM) -r $(LIBARCHIVE_VERSION)
 	@$(RM) -r $(MXML_VERSION)
 	@$(RM) -r $(EXPAT_VERSION)
 	@$(RM) -r $(NETTLE_VERSION)
 	@$(RM) -r $(WSLAY_VERSION)
 	@$(RM) -r $(SPEEX_VERSION)
-	@$(RM) -r $(LIBOPUS_VERSION)
-	@$(RM) -r $(LIBOPUSFILE_VERSION)
 	@$(RM) -r $(FFMPEG_VERSION)
 	@$(RM) -r $(MPG123_VERSION)
 	@$(RM) -r $(LIBSSH2_VERSION)
+	@$(RM) -r $(LIBXML2_VERSION)
+	@$(RM) -r $(SQLITE_VERSION)
+    

@@ -1,6 +1,6 @@
 diff -Naur libarchive-3.1.2.orig/libarchive/archive_ppmd7.c libarchive-3.1.2/libarchive/archive_ppmd7.c
---- libarchive-3.1.2.orig/libarchive/archive_ppmd7.c	2013-01-13 20:43:45.000000000 -0500
-+++ libarchive-3.1.2/libarchive/archive_ppmd7.c	2016-05-28 09:20:30.508455170 -0400
+--- libarchive-3.1.2.orig/libarchive/archive_ppmd7.c
++++ libarchive-3.1.2/libarchive/archive_ppmd7.c
 @@ -4,7 +4,7 @@
 
  #include "archive_platform.h"
@@ -11,8 +11,8 @@ diff -Naur libarchive-3.1.2.orig/libarchive/archive_ppmd7.c libarchive-3.1.2/lib
  #include "archive_ppmd7_private.h"
 
 diff -Naur libarchive-3.1.2.orig/libarchive/archive_read_disk_posix.c libarchive-3.1.2/libarchive/archive_read_disk_posix.c
---- libarchive-3.1.2.orig/libarchive/archive_read_disk_posix.c	2013-01-13 20:43:45.000000000 -0500
-+++ libarchive-3.1.2/libarchive/archive_read_disk_posix.c	2016-05-28 09:21:50.131786140 -0400
+--- libarchive-3.1.2.orig/libarchive/archive_read_disk_posix.c
++++ libarchive-3.1.2/libarchive/archive_read_disk_posix.c
 @@ -100,7 +100,7 @@
  #include "archive_read_disk_private.h"
 
@@ -22,9 +22,30 @@ diff -Naur libarchive-3.1.2.orig/libarchive/archive_read_disk_posix.c libarchive
  #endif
  #ifndef O_BINARY
  #define O_BINARY	0
+@@ -2417,7 +2417,7 @@
+ #else
+ 		if (tree_enter_working_dir(t) != 0)
+ 			return NULL;
+-		if (lstat(tree_current_access_path(t), &t->lst) != 0)
++		if (stat(tree_current_access_path(t), &t->lst) != 0)
+ #endif
+ 			return NULL;
+ 		t->flags |= hasLstat;
+diff -Naur libarchive-3.1.2.orig/libarchive/archive_read_support_format_mtree.c libarchive-3.1.2/libarchive/archive_read_support_format_mtree.c
+--- libarchive-3.1.2.orig/libarchive/archive_read_support_format_mtree.c
++++ libarchive-3.1.2/libarchive/archive_read_support_format_mtree.c
+@@ -1144,7 +1144,7 @@
+ 			mtree->fd = -1;
+ 			st = NULL;
+ 		}
+-	} else if (lstat(path, st) == -1) {
++	} else if (stat(path, st) == -1) {
+ 		st = NULL;
+ 	}
+
 diff -Naur libarchive-3.1.2.orig/libarchive/archive_write_disk_posix.c libarchive-3.1.2/libarchive/archive_write_disk_posix.c
---- libarchive-3.1.2.orig/libarchive/archive_write_disk_posix.c	2013-02-07 19:52:07.000000000 -0500
-+++ libarchive-3.1.2/libarchive/archive_write_disk_posix.c	2016-05-28 09:35:03.598429241 -0400
+--- libarchive-3.1.2.orig/libarchive/archive_write_disk_posix.c
++++ libarchive-3.1.2/libarchive/archive_write_disk_posix.c
 @@ -384,7 +384,7 @@
  	 * XXX At this point, symlinks should not be hit, otherwise
  	 * XXX a race occurred.  Do we want to check explicitly for that?
@@ -64,8 +85,8 @@ diff -Naur libarchive-3.1.2.orig/libarchive/archive_write_disk_posix.c libarchiv
  			archive_set_error(&a->archive, errno,
  			    "Can't stat existing object");
 diff -Naur libarchive-3.1.2.orig/libarchive/archive_write_set_format_iso9660.c libarchive-3.1.2/libarchive/archive_write_set_format_iso9660.c
---- libarchive-3.1.2.orig/libarchive/archive_write_set_format_iso9660.c	2013-02-07 19:52:07.000000000 -0500
-+++ libarchive-3.1.2/libarchive/archive_write_set_format_iso9660.c	2016-05-28 09:22:47.435117771 -0400
+--- libarchive-3.1.2.orig/libarchive/archive_write_set_format_iso9660.c
++++ libarchive-3.1.2/libarchive/archive_write_set_format_iso9660.c
 @@ -2178,7 +2178,7 @@
  	strncpy(system_id, "Windows", size-1);
  	system_id[size-1] = '\0';
@@ -84,3 +105,5 @@ diff -Naur libarchive-3.1.2.orig/libarchive/archive_write_set_format_iso9660.c l
  #endif
  	offset *= -1;
  	if (tm->tm_isdst)
+--
+2.7.2.windows.1
