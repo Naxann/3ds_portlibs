@@ -1,5 +1,68 @@
-3DS Portlibs
-============
+pacman
+======
+
+3ds portlibs and Switch portlibs are now available with a custom version of pacman.
+
+How to use pacman (Arch Linux, Windows, OSX)
+--------------------------------------------
+
+Listing package
+
+    pacman -Sl dkp-libs
+
+Installing package
+    
+    pacman -S <name-of-package>
+
+
+Removing package
+    
+    pacman -R <name-of-package>
+
+How to use pacman (Debian systems)
+--------------------------------------------
+
+Listing package
+
+    dkp-pacman -Sl
+
+Installing package
+    
+    dkp-pacman -S <name-of-package>
+
+Removing package
+    
+    dkp-pacman -R <name-of-package>
+
+
+Installing on Windows
+---------------------
+
+Use the last Windows installer which install a version of msys2 and a version of pacman
+
+    https://github.com/devkitPro/installer/releases/latest
+
+
+Installing on Debian
+--------------------
+
+Download pacman release here : https://github.com/devkitPro/pacman/releases/download/v1.0.0/devkitpro-pacman.deb
+
+Install it with :
+    
+    sudo dpkg -i devkitpro-pacman.deb
+    
+Installing on OSX
+-----------------
+
+Run this package : https://github.com/devkitPro/pacman/releases/download/v1.0.0/devkitpro-pacman-installer.pkg
+
+
+3DS Custom Portlibs
+===================
+However, there is some portlibs which are not available at this moment, which are on this repository only
+Those libs could be added to pacman in a near future
+
 
 Here is a Makefile for building various portlibs for 3DS. 
 It is basically libs compiled with the compiler equivalent to the processor
@@ -122,3 +185,4 @@ Thanks to :
 - carstene1ns for his original portlibs of speex for Wii : https://github.com/carstene1ns/portlibs-wii/tree/master/speex
 - smartperson for the libmbedtls fix and the libssh2 port : https://github.com/smartperson/3ds_portlibs
 - deltabeard for the libopus, libopusfile, mpg123 and ffmpeg ports : https://github.com/deltabeard/3ds_portlibs
+- WinterMute and his post on devkitPro forum : https://devkitpro.org/viewtopic.php?f=13&t=8702
