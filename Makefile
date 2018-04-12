@@ -391,9 +391,6 @@ $(LIBFAAD2_SRC):
 $(FMT_SRC):
 	@$(call DOWNLOAD,$@,$(FMT_DOWNLOAD))
 
-$(LIBARCHIVE_SRC):
-	@$(call DOWNLOAD,$@,$(LIBARCHIVE_DOWNLOAD))
-
 $(MXML_SRC):
 	@$(call DOWNLOAD,$@,$(MXML_DOWNLOAD))
 
@@ -408,12 +405,6 @@ $(WSLAY_SRC):
 	
 $(SPEEX_SRC):
 	@$(call DOWNLOAD,$@,$(SPEEX_DOWNLOAD))
-
-$(LIBOPUS_SRC):
-	@$(call DOWNLOAD,$@,$(LIBOPUS_DOWNLOAD))
-
-$(LIBOPUSFILE_SRC):
-	@$(call DOWNLOAD,$@,$(LIBOPUSFILE_DOWNLOAD))
 
 $(FFMPEG_SRC):
 	@$(call DOWNLOAD,$@,$(FFMPEG_DOWNLOAD))
@@ -742,7 +733,7 @@ install:
 	@[ ! -d $(LIBVORBIS_VERSION) ] || $(MAKE) -C $(LIBVORBIS_VERSION) install
 	@[ ! -d $(LIBFAAD2_VERSION) ] || $(MAKE) -C $(LIBFAAD2_VERSION) install
 	@[ ! -d $(FMT_VERSION) ] || $(MAKE) -C $(FMT_VERSION) install
-	@[ ! -d $(MXML_VERSION) ] || $(MAKE) -C $(MXML_VERSION) install-libmxml.a
+	@[ ! -d $(MXML_VERSION) ] || { $(MAKE) -C $(MXML_VERSION) install-libmxml.a && cp $(MXML_VERSION)/mxml.h $(PORTLIBS_PATH)/3ds/include/; }
 	@[ ! -d $(EXPAT_VERSION) ] || $(MAKE) -C $(EXPAT_VERSION) install
 	@[ ! -d $(NETTLE_VERSION) ] || $(MAKE) -C $(NETTLE_VERSION) install-static
 	@[ ! -d $(WSLAY_VERSION) ] || $(MAKE) -C $(WSLAY_VERSION)/lib install
